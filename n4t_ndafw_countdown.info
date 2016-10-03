@@ -1,0 +1,11 @@
+name = NIDA Teens NDFAW Countdown
+description = "A block that displays a count-down timer for next NDAFW."
+author = NIDA
+core = 7.x
+package = NIDA
+version = 0.1
+
+configure = admin/config/n4t_ndafw_countdown
+
+dependencies[] = block
+dependencies[] = date_popup

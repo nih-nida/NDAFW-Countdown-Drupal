@@ -1,0 +1,83 @@
+<?php
+define('N4T_NDAFW_DATE_FORMAT', 'm-d-Y');
+define('N4T_NDAFW_DATE_END_DATE', 'n4t_ndafw_date_end_date');
+
+/**
+ * Implements hook_permission().
+ */
+function n4t_ndafw_countdown_permission() {
+  $permission['admin_n4t_ndafw_countdown'] = array(
+    'title' => t('Administer NIDA Teens NDAFW Countdown'),
+  );
+
+  return $permission;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function n4t_ndafw_countdown_theme($existing, $type, $theme, $path) {
+  $themes['n4t_ndafw_countdown'] = array(
+    'template' => 'countdown',
+    'path'     => $path . '/templates',
+  );
+
+  return $themes;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function n4t_ndafw_countdown_block_info() {
+  $blocks['countdown'] = array(
+    'info' => 'N4T NDAFW Countdown',
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function n4t_ndafw_countdown_block_view($delta = '') {
+  $block = array();
+
+  if ($delta === 'countdown') {
+    $endDate = variable_get(N4T_NDAFW_DATE_END_DATE, '');
+
+    if (!empty($endDate)) {
+      drupal_add_css(drupal_get_path('module', 'n4t_ndafw_countdown') . '/css/n4t_ndafw_countdown.css');
+      drupal_add_js(drupal_get_path('module', 'n4t_ndafw_countdown') . '/js/n4t_ndafw_countdown.js');
+      drupal_add_js(array(
+        'n4t_ndafw_countdown' => array(
+          'enddate' => variable_get(N4T_NDAFW_DATE_END_DATE, '')
+        )
+      ), 'setting');
+
+      $block['content'] = theme('n4t_ndafw_countdown');
+    }
+    else {
+      $block['content'] = t('Please update N4T NDAFW <a href="@url">settings</a> first.', array(
+        '@url' => url('admin/config/n4t_ndafw_countdown')
+      ));
+    }
+  }
+
+  return $block;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function n4t_ndafw_countdown_menu() {
+  $menu['admin/config/n4t_ndafw_countdown'] = array(
+    'title'            => 'NDAFW Countdown',
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('n4t_ndafw_countdown_admin_form'),
+    'access arguments' => array('admin_n4t_ndafw_countdown'),
+    'type'             => MENU_NORMAL_ITEM,
+    'file'             => 'n4t_ndafw_countdown.admin.inc',
+  );
+
+  return $menu;
+}

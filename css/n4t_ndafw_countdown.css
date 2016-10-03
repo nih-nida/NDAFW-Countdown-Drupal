@@ -1,0 +1,51 @@
+.n4t-ndafw-wrapper {
+  max-width: 700px;
+  width: 100%;
+}
+
+.n4t-ndafw-wrapper .logo {
+  margin: 0 auto 1em auto;
+  max-width: 100%;
+}
+
+.n4t-ndafw-wrapper #n4t-ndafw-countdown {
+  color: #C32800;
+  display: inline-block;
+  font-weight: bold;
+  font-size: 125%;
+  text-align: center;
+  vertical-align: top;
+}
+
+.n4t-ndafw-wrapper #n4t-ndafw-countdown:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+.n4t-ndafw-wrapper #n4t-ndafw-countdown p {
+  margin-bottom: .5em;
+}
+
+.n4t-ndafw-wrapper #n4t-ndafw-countdown .time {
+  font-size: 200%;
+}
+
+.n4t-ndafw-wrapper .button {
+  width: auto;
+  margin: 0 auto;
+}
+
+.n4t-ndafw-wrapper .button a {
+  background: #C32800;
+  color: #fff;
+  display: block;
+  font-size: 125%;
+  font-weight: bold;
+  margin: 2em auto;
+  padding: 1em 2em;
+  text-decoration: none;
+}
